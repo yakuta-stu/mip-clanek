@@ -1,4 +1,4 @@
-\documentclass[10pt,twoside,a4paper]{article}
+\documentclass[10pt,twoside,czech,a4paper]{article}
 
 \usepackage{polyglossia}
 \setdefaultlanguage{czech}
@@ -41,6 +41,8 @@
 
 P2P (Peer-to-Peer) protokoly pro přenos souborů představují způsob sdílení dat mezi uzly ve stejné síti bez nutnosti centrálního serveru.
 Tento způsob sdílení dat umožňuje výrazné snížení nákladů na infrastrukturu, zatímco zajišťuje rychlý a spolehlivý přenos velkých souborů.
+Protokoly Peer-to-Peer jsou v dnešní době velmi oblíbené, protože umožňují decentralizaci od nich (což v dnešní době zabraňuje “zájemcům” mazat soubory, a proto podporuje svobodu slova).
+
 V mém projektu se zaměřím na analýzu různých P2P protokolů, jako jsou BitTorrent, eDonkey a Gnutella.
 Hlavním cílem je porozumění architektuře těchto protokolů, mechanismům vyhledávání a sdílení souborů, a způsobům, jak tyto protokoly řeší problémy s bezpečností a soukromím.
 Porovnám také P2P protokoly s tradičními client-server modely, abych diskutoval o výhodách a nevýhodách obou přístupů.
@@ -50,11 +52,53 @@ Dále se pokusím předvídat možný vývoj P2P technologií a zvážit jejich 
 
 \section{Co je Peer-to-Peer?}
 
+Pro počítačové systémy Peer-to-Peer (P2P) jsou charakteristická konsensuální spojení mezi "peery" (rovnocenní účastníci sítě).
+To znamená, že počítače v síti mohou vzájemně komunikovat, aniž by měly procházet přes samostatný serverový počítač\cite{Bauwens2019}.
+Z tohoto důvodu se při přechodu z Client-Server sítě na Peerto-Peer snižuje zatížení serveru, což je jedna z výhod používání protokolu P2P.
+Navíc se zvyšuje rychlost přenosu dat a propustnost sítě.
+
+Pokud jde o P2P síť, je charakteristické, že každý účastník sítě může plnit funkci serveru i klienta.
+Při přenosu souborů prostřednictvím P2P protokolů to znamená, že každý účastník sítě, který stáhl část přenášeného souboru (funkce klienta), ji může předat ostatním účastníkům (funkce serveru).
+Přitom se vůbec (nebo téměř vůbec) nepoužívá samostatný server.
+
+Jednou z klíčových vlastností tohoto typu sítě pro přenos souborů je, že síť skoro není závislá na jediném serveru, tj. síť se nezhroutí, pokud ji někteří členové opustí, na rozdíl od sítě Client-Server, kde při výpadku serveru dojde k výpadku celé sítě.
+
+Za zmínku stojí také to, že díky decentralizaci sítě P2P téměř není možné zastavit šíření jakýchkoli souborů v síti, protože všichni uživatelé v síti jsou servery.
+Jinými slovy, na rozdíl od sítě Client-Server, kde by distribuce souborů skončila po vypnutí serveru, by museli být všichni členové sítě vyřazeni.
+
 
 \section{P2P protokoly pro přenos souborů}
 
+Ačkoli nejzákladnějším požadavkem na síť P2P je decentralizace od serveru, některé protokoly používají servery ke zjišťování informací o souborech nebo o uživatelích, od nichž lze určitý soubor převzít.
+Na základě toho lze protokoly rozdělit do dvou různých skupin podle jejich architektury: čistá P2P a P2P zprostředkovaná serverem\cite{Lui2002}.
+
+\subsection{Čisté P2P protokoly}
+
+K této skupině patří protokoly jako Gnutella a Freenet.
+Hlavní výhodou čistých P2P protokolů je, že síť, na rozdíl od P2P protokolů zprostředkovaných serverem, vůbec není závislá na serveru, protože žádný nemá.
+Ale kvůli té nezávislosti musí dynamicky objevovat další partnery v síti, co způsobuje problémy, jako je vyšší spotřeba síťových prostředků a nízká škálovatelnost\cite{Lui2002}.
+
+\subsection{P2P protokoly zprostředkované serverem}
+
+K této skupině patří protokoly jako eDonkey, Napster, BitTorrent.
+Jak bylo dříve zmíněno, jednou z nevýhod této skupiny P2P protokolů je, že síť je závislá na serveru.
+I když síť se nezhroutí při výpadku serveru, P2P aplikace nebude schopna najít další peery\cite{Lui2002}.
+
 
 \section{BitTorrent protokol}
+
+BitTorrent je příkladem P2P sítě s centralizovanou strukturou (zprostředkovanou serverem).
+Centrálním uzlem v této síti je tracker (server), který obsahuje informace o seznamu uzlů připojených k síti a službách poskytovaných jednotlivými uzly (např. seznam souborů dostupných ke stažení z daného uzlu).
+Pro stažení požadovaného souboru uzel odesílá trackeru požadavek obsahující identifikátor požadovaného souboru, který se obvykle získává z torrent souboru (viz dále).
+Tracker odpovídá na tento požadavek seznamem uzlů, ve kterých je požadovaný soubor k dispozici\cite{Radchenko2012}.
+Server nadále pomáhá uzlům vzájemně komunikovat, ačkoli poslední verze softwaru vyžadují server pouze v inicializační fázi (což umožňuje větší decentralizaci od serveru)\cite{Lande2008}.
+
+Specifikem BitTorrentu je pojem torrent, který definuje relaci přenosu části souboru do množiny peerů.
+Uživatel se obvykle připojí k existujícímu torrentu stažením .torrent souboru, který obsahuje metainformace o stahovaném souboru a IP adresu trackeru torrentu\cite{Legout2005}.
+
+Podle protokolu BitTorrent se soubory přenášejí po částech, přičemž každý klient tyto části stahuje současně s tím, jak je předává ostatním klientům.
+Tím se snižuje zatížení a závislost na každém zdrojovém klientovi\cite{Lande2008}.
+Při dostatečně velkém počtu peerů se tím také výrazně zrychlí stahování souborů, což je velká výhoda tohoto protokolu při stahování velkých souborů\cite{Barakat2004}.
 
 
 \section{Srovnání P2P a tradičních client-server modelů}
