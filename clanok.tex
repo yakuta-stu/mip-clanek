@@ -41,9 +41,9 @@
 
 P2P (Peer-to-Peer) protokoly pro přenos souborů představují způsob sdílení dat mezi uzly ve stejné síti bez nutnosti centrálního serveru.
 Tento způsob sdílení dat umožňuje výrazné snížení nákladů na infrastrukturu, zatímco zajišťuje rychlý a spolehlivý přenos velkých souborů.
-Protokoly Peer-to-Peer jsou v dnešní době velmi oblíbené, protože umožňují decentralizaci od nich (což v dnešní době zabraňuje “zájemcům” mazat soubory, a proto podporuje svobodu slova).
+Protokoly Peer-to-Peer jsou v dnešní době velmi oblíbené, protože umožňují decentralizaci od serverů (což v dnešní době zabraňuje “zájemcům” mazat soubory, a tím podporuje svobodu slova).
 
-V mém projektu se zaměřím na analýzu různých P2P protokolů, jako jsou BitTorrent, eDonkey a Gnutella.
+V mém článku se zaměřím na analýzu různých P2P protokolů, jako jsou BitTorrent, eDonkey a Gnutella.
 Hlavním cílem je porozumění architektuře těchto protokolů, mechanismům vyhledávání a sdílení souborů, a způsobům, jak tyto protokoly řeší problémy s bezpečností a soukromím.
 Porovnám také P2P protokoly s tradičními client-server modely, abych diskutoval o výhodách a nevýhodách obou přístupů.
 Důležitou součástí mé analýzy bude hodnocení různých implementací P2P protokolů a jejich dopad na výkon, škálovatelnost a odolnost proti chybám.
@@ -76,38 +76,74 @@ Na základě toho lze protokoly rozdělit do dvou různých skupin podle jejich 
 
 K této skupině patří protokoly jako Gnutella a Freenet.
 Hlavní výhodou čistých P2P protokolů je, že síť, na rozdíl od P2P protokolů zprostředkovaných serverem, vůbec není závislá na serveru, protože žádný nemá.
-Ale kvůli té nezávislosti musí dynamicky objevovat další partnery v síti, co způsobuje problémy, jako je vyšší spotřeba síťových prostředků a nízká škálovatelnost\cite{Lui2002}.
+Ale kvůli té nezávislosti musí dynamicky objevovat další partnery v síti, což způsobuje problémy, jako je vyšší spotřeba síťových prostředků a nízká škálovatelnost\cite{Lui2002}.
+
+	
 
 \subsection{P2P protokoly zprostředkované serverem}
 
-K této skupině patří protokoly jako eDonkey, Napster, BitTorrent.
+K této skupině patří protokoly jako eDonkey, Napster, a BitTorrent.
 Jak bylo dříve zmíněno, jednou z nevýhod této skupiny P2P protokolů je, že síť je závislá na serveru.
-I když síť se nezhroutí při výpadku serveru, P2P aplikace nebude schopna najít další peery\cite{Lui2002}.
+I když se síť při výpadku serveru nezhroutí, P2P aplikace nebude schopna najít další peery\cite{Lui2002}.
 
 
-\section{BitTorrent protokol}
+
+\section{Srovnání P2P a tradičních client-server modelů}
+
+P2P a tradiční client-server modely představují dva různé přístupy k organizaci a řízení síťové komunikace a sdílení dat.
+Přestože mají oba modely své silné stránky a jsou vhodné pro různé účely, odlišují se v několika klíčových aspektech.
+
+\subsection{Decentralizace versus centralizace}
+
+P2P model je charakterizován decentralizací, kde každý uzel (peer) v síti může fungovat jak jako klient, tak jako server, což podporuje distribuci dat a zajišťuje robustnost sítě při výpadku jednotlivých uzlů.
+Na druhou stranu, client-server model je založen na centralizované architektuře, kde server poskytuje služby klientům a spravuje přístup k datům.
+Výpadky serveru v client-server modelu mohou vést k výpadkům služby, zatímco v P2P modelu může síť nadále fungovat, dokud existuje dostatečný počet peerů.
+
+\subsection{Škálovatelnost}
+
+P2P sítě mají potenciál ke škálování, protože noví uživatelé mohou přispívat svými zdroji (např. bandwidth, úložným prostorem) k celkové kapacitě sítě.
+Naopak, client-server modely mohou čelit omezením v škálovatelnosti, pokud server nedokáže zvládnout rostoucí počet klientů.
+
+\subsection{Náklady na infrastrukturu}
+
+V P2P modelu jsou náklady na infrastrukturu distribuovány mezi všechny učastníky sítě, což může vést k nižším celkovým nákladům ve srovnání s client-server modely, kde je potřeba investovat do silných a spolehlivých serverů, aby bylo možné zvládnout požadavky klientů \cite{Leibnitz2007}.
+
+\subsection{Bezpečnost}
+
+Client-server modely umožňují lepší kontrolu a správu dat a služeb, což může vést k vyšší úrovni bezpečnosti a spolehlivosti.
+V P2P modelu může být obtížnější zajistit bezpečnost a integritu dat, zejména v otevřených P2P sítích, kde může dojít k většímu riziku neoprávněného přístupu a šíření škodlivého softwaru \cite{Leibnitz2007}.
+
+Avšak v P2P sítích může decentralizovaná struktura ztížit vnějším pozorovatelům, jako jsou útočníci nebo autority, zjistit, kde jsou data uložena a kdo je sdílí, což může uživatelům poskytnout vyšší úroveň anonymity.
+Naopak, v tradičních client-server modelůch je sledovatelnost jednodušší, protože veškerá komunikace prochází centrálním serverem, který může být snadno monitorován a analyzován.
+
+\subsection{Rychlost a výkon}
+
+Výkon a rychlost přenosu dat může být ve velkých P2P sítích výrazně vyšší, protože data mohou být přenášena paralelně od mnoha peerů.
+Na druhou stranu, výkon client-server modelů může být omezen kapacitou serveru, zejména při vysoké zátěži.
+
+
+\section{Hodnocení a dopad P2P protokolů}
+
+\subsection{BitTorrent protokol}
 
 BitTorrent je příkladem P2P sítě s centralizovanou strukturou (zprostředkovanou serverem).
 Centrálním uzlem v této síti je tracker (server), který obsahuje informace o seznamu uzlů připojených k síti a službách poskytovaných jednotlivými uzly (např. seznam souborů dostupných ke stažení z daného uzlu).
-Pro stažení požadovaného souboru uzel odesílá trackeru požadavek obsahující identifikátor požadovaného souboru, který se obvykle získává z torrent souboru (viz dále).
+Pro stažení požadovaného souboru uzel odesílá trackeru požadavek (pomocí HTTP protokolu) obsahující identifikátor požadovaného souboru, který se obvykle získává z torrent souboru (viz dále) \cite{Chokkalingam2004}.
 Tracker odpovídá na tento požadavek seznamem uzlů, ve kterých je požadovaný soubor k dispozici\cite{Radchenko2012}.
 Server nadále pomáhá uzlům vzájemně komunikovat, ačkoli poslední verze softwaru vyžadují server pouze v inicializační fázi (což umožňuje větší decentralizaci od serveru)\cite{Lande2008}.
 
 Specifikem BitTorrentu je pojem torrent, který definuje relaci přenosu části souboru do množiny peerů.
-Uživatel se obvykle připojí k existujícímu torrentu stažením .torrent souboru, který obsahuje metainformace o stahovaném souboru a IP adresu trackeru torrentu\cite{Legout2005}.
+Uživatel se obvykle připojí k existujícímu torrentu stažením .torrent souboru, který obsahuje metainformace o stahovaném souboru a IP adresu trackeru torrentu\cite{Legout2005, Chokkalingam2004}.
 
 Podle protokolu BitTorrent se soubory přenášejí po částech, přičemž každý klient tyto části stahuje současně s tím, jak je předává ostatním klientům.
 Tím se snižuje zatížení a závislost na každém zdrojovém klientovi\cite{Lande2008}.
 Při dostatečně velkém počtu peerů se tím také výrazně zrychlí stahování souborů, což je velká výhoda tohoto protokolu při stahování velkých souborů\cite{Barakat2004}.
 
 
-\section{Srovnání P2P a tradičních client-server modelů}
-
-
-\section{Hodnocení a dopad P2P protokolů}
-
-
 \section{Budoucnost P2P technologií}
+
+
+\section{Závěr}
 
 
 \bibliography{literatura}
