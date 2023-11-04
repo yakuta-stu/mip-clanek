@@ -1,0 +1,83 @@
+commit 2c6d0e3acfca2e74cad911ad6335ae63cc7fda23
+Author: Andrei Yakuta <145667385+yakuta-stu@users.noreply.github.com>
+Date:   Sat Nov 4 15:17:00 2023 +0100
+
+    <SCRUM-15, 8> <Refactor and build the code>
+
+commit 53d0cb2bd82d5630679c92b4c563bd86e992e55c
+Author: Andrei Yakuta <145667385+yakuta-stu@users.noreply.github.com>
+Date:   Sat Nov 4 14:58:25 2023 +0100
+
+    <SCRUM-14, 7> <Write an abstract>
+
+commit 09fdea57672dd8cb0764d3662fa0568a2ff34235
+Author: Andrei Yakuta <145667385+yakuta-stu@users.noreply.github.com>
+Date:   Sat Nov 4 14:42:51 2023 +0100
+
+    <SCRUM-13, 6> <Add some images>
+
+commit 05458f52de5aec9447e05c5ddecab1a9cb66f838
+Author: Andrei Yakuta <145667385+yakuta-stu@users.noreply.github.com>
+Date:   Sat Nov 4 14:41:46 2023 +0100
+
+    <SCRUM-9, 5> <Add references>
+
+commit 3fbdaf9b0298910b436ea53fc35108d21cae3017
+Author: Andrei Yakuta <145667385+yakuta-stu@users.noreply.github.com>
+Date:   Sat Nov 4 14:40:50 2023 +0100
+
+    <SCRUM-12, 4> <Write next 30% of the content>
+
+commit 5d83d6fd2ff42e864530142829e5c3a5cdcbb403
+Author: Andrei Yakuta <145667385+yakuta-stu@users.noreply.github.com>
+Date:   Fri Nov 3 19:30:14 2023 +0100
+
+    <SCRUM-11, 3> <Write first 40% of the content>
+
+commit 46d251cb2969d48535a046187d6e5defd0842e25
+Author: Andrei Yakuta <145667385+yakuta-stu@users.noreply.github.com>
+Date:   Fri Nov 3 17:48:05 2023 +0100
+
+    <SCRUM-16, 2> <Build pdf file>
+
+commit c3cf3705ba9197784276cf0b9dde622cd209a37d
+Author: Andrei Yakuta <145667385+yakuta-stu@users.noreply.github.com>
+Date:   Fri Nov 3 17:44:16 2023 +0100
+
+    <SCRUM-10, 1> <Make an article structure>
+
+commit b90981ef2b87cc3ea464afe0a619351e8402b662
+Author: Andrei Yakuta <145667385+yakuta-stu@users.noreply.github.com>
+Date:   Thu Oct 19 12:51:15 2023 +0200
+
+    Translate university and faculty name to czech
+
+commit 9048345e443e0eb62e98368d1dcf930b52aeb574
+Author: Andrei Yakuta <xyakuta@stuba.sk>
+Date:   Thu Oct 19 12:14:25 2023 +0200
+
+    Make date generate automatically
+
+commit 8a405b403d94b2526a73f4e186d0d9b81b5ab12d
+Author: Andrei Yakuta <xyakuta@stuba.sk>
+Date:   Thu Oct 12 13:23:17 2023 +0200
+
+    Add introduction
+
+commit acf94f84437dbf98193e92f8131cca8dc2a18624
+Author: Andrei Yakuta <xyakuta@stuba.sk>
+Date:   Thu Oct 12 13:17:50 2023 +0200
+
+    Clean code
+
+commit 51673bd81cf21c952d6333ef57761f3b52cb7631
+Author: Andrei Yakuta <xyakuta@stuba.sk>
+Date:   Thu Oct 12 13:05:56 2023 +0200
+
+    Add article details
+
+commit d06153724d754bcc9b27027af9bd58bea0cae3ec
+Author: Andrei Yakuta <xyakuta@stuba.sk>
+Date:   Thu Oct 12 12:52:39 2023 +0200
+
+    Add inital set of files
