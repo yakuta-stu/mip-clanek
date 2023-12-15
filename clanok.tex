@@ -11,8 +11,8 @@
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage{hyperref}
-
 \usepackage{cite}
+\usepackage{float}
 
 \pagestyle{headings}
 
@@ -79,7 +79,7 @@ K této skupině patří protokoly jako Gnutella a Freenet.
 Hlavní výhodou čistých P2P protokolů je, že síť, na rozdíl od P2P protokolů zprostředkovaných serverem, vůbec není závislá na serveru, protože žádný nemá.
 Ale kvůli té nezávislosti musí dynamicky objevovat další partnery v síti, což způsobuje problémy, jako je vyšší spotřeba síťových prostředků a nízká škálovatelnost\cite{Lui2002}.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{pure-p2p.png}
 	\caption{Architektura čisté P2P sítě. Zdroj \cite{Leong2007}}
@@ -93,7 +93,7 @@ K této skupině patří protokoly jako eDonkey, Napster, a BitTorrent.
 Jak bylo dříve zmíněno, jednou z nevýhod této skupiny P2P protokolů je, že síť je závislá na serveru.
 I když se síť při výpadku serveru nezhroutí, P2P aplikace nebude schopna najít další peery\cite{Lui2002}.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{server-mediated-p2p.png}
 	\caption{Architektura P2P sítě zprostředkované serverem. Zdroj \cite{Leong2007}}
@@ -105,6 +105,28 @@ I když se síť při výpadku serveru nezhroutí, P2P aplikace nebude schopna n
 
 P2P a tradiční client-server modely představují dva různé přístupy k organizaci a řízení síťové komunikace a sdílení dat.
 Přestože mají oba modely své silné stránky a jsou vhodné pro různé účely, odlišují se v několika klíčových aspektech.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\textbf{Aspekt} & \textbf{P2P} & \textbf{Client-Server} \\
+		\hline
+		Decentralizace & Ano & Ne \\
+		\hline
+		Škálovatelnost & Vysoká & Omezená \\
+		\hline
+		Náklady & Rozložené & Centralizované \\
+		\hline
+		Bezpečnost & Variabilní & Vyšší \\
+		\hline
+		Rychlost & Vysoká & Závislá na serveru \\
+		\hline
+		Anonymita & Ano & Ne \\
+		\hline
+	\end{tabular}
+	\caption{Srovnání P2P a client-server modelů}
+\end{table}
 
 \subsection{Decentralizace versus centralizace}
 
@@ -152,11 +174,58 @@ Podle protokolu BitTorrent se soubory přenášejí po částech, přičemž ka�
 Tím se snižuje zatížení a závislost na každém zdrojovém klientovi\cite{Lande2008}.
 Při dostatečně velkém počtu peerů se tím také výrazně zrychlí stahování souborů, což je velká výhoda tohoto protokolu při stahování velkých souborů\cite{Barakat2004}.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{BitTorrent.png}
+	\caption{Architektura BitTorrent sítě}
+\end{figure}
+
+\subsection{Gnutella protokol}
+
+Gnutella je příkladem P2P sítě s decentralizovanou strukturou (čisté P2P), která nevyžaduje centrální servery pro indexaci nebo vyhledávání souborů.
+Na rozdíl od BitTorrentu, který využívá tracker pro koordinaci sdílení souborů, Gnutella funguje na plně decentralizovaném modelu.
+Každý uzel v Gnutella síti může fungovat jak jako klient, tak jako server, což umožňuje přímé sdílení souborů mezi uživateli.
+Tato architektura zajišťuje, že síť je odolnější proti výpadkům a obtížněji cenzurovatelná.
+
+V Gnutella protokolu, když uživatel hledá soubor, jeho dotaz se přeposílá od uzlu k uzlu pomocí mechanismu zvaného "flooding".
+Tento proces spočívá v rozesílání dotazu všem sousedním uzlům, které pak tento dotaz dále přeposílají, dokud není nalezen odpovídající soubor\cite{Howe2000}.
+Skutečné stahování souboru porbíhá pomocí HTTP portokolu s uzlem, který první informoval, že soubor má \cite{Gnutella, Portmann2001}.
+Ačkoliv tento způsob je efektivní pro nalezení souborů v malé síti, může způsobovat vysokou síťovou zátěž v rozsáhlejších sítích\cite{Ripeanu2001}.
+
+Navzdory výzvám spojeným s decentralizací, jako jsou efektivita vyhledávání a bezpečnostní rizika, Gnutella představuje důležitý model v P2P technologiích.
+Jeho přístup k distribuci a sdílení souborů zůstává významný pro svou schopnost podporovat svobodný a neomezený přenos informací mezi uživateli.
+Avšak decentralizovaná povaha sítě ztěžuje implementaci bezpečnostních kontrol, a proto je Gnutella často vnímána jako méně bezpečná než jiné P2P sítě, jako je BitTorrent.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{Gnutella.png}
+	\caption{Architektura Gnutella sítě}
+\end{figure}
+
 
 \section{Budoucnost P2P technologií}
 
+S rostoucí digitalizací a vývojem technologií se očekává, že P2P technologie budou hrát klíčovou roli v budoucích inovacích.
+Jedním z nejperspektivnějších směrů je vývoj nových protokolů, které spojují výhody P2P a tradičních client-server modelů.
+Tyto hybridní protokoly by mohly nabídnout vyšší efektivitu, lepší škálovatelnost a větší bezpečnost.
+
+P2P sítě by tak mohly být lépe integrovány do cloudových služeb, což by umožnilo lepší správu a distribuci dat.
+Kromě toho se očekává, že P2P technologie budou hrát významnou roli v oblastech jako decentralizované úložiště dat, správa velkých dat a vývoj decentralizovaných aplikací (DApps), které jsou stále více populární v blockchainovém prostředí.
+Tyto inovace by mohly výrazně ovlivnit způsob, jakým lidé sdílejí a spravují digitální obsah, a otevřít cestu pro nové formy digitální interakce a kolaborace.\cite{Kisembe2017}
+
 
 \section{Závěr}
+
+V tomto článku byla prozkoumána dynamika a vliv Peer-to-Peer protokolů v kontextu současného digitálního světa.
+Porovnáním s tradičními client-server modely jsou odhalené jedinečné výhody P2P přístupu, zejména v decentralizaci, škálovatelnosti a efektivitě přenosu dat.
+Prostřednictvím případových studií protokolů jako BitTorrent a Gnutella je ukázáno, jak různé P2P systémy přistupují k přenosu souborů a jak řeší výzvy, jako jsou bezpečnost, vyhledávání a distribuce dat.
+
+Význam P2P technologií se neustále zvyšuje v době, kdy digitalizace a požadavky na ukládání dat rychle rostou.
+Vzhledem k jejich potenciálu pro rozvoj decentralizovaných aplikací a integraci s blockchainovými technologiemi, se očekává, že P2P protokoly budou hrát klíčovou roli v budoucích technologických inovacích.
+Budoucnost P2P technologií může zahrnovat nové hybridní protokoly, které kombinují nejlepší aspekty P2P a client-server modelů, čímž poskytnou silnější, bezpečnější a efektivnější systémy pro sdílení a správu digitálního obsahu.
+
+Závěrem lze říci, že P2P technologie nejenže představují významnou část současného digitálního ekosystému, ale budou také hrát zásadní roli v jeho budoucím vývoji.
+Ať už jde o podporu svobody projevu, efektivní distribuci dat, nebo podporu nových inovací, P2P protokoly jsou klíčovým prvkem pro budoucí digitální krajinu.
 
 
 \bibliography{literatura}
